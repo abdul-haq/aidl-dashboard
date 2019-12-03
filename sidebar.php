@@ -1,4 +1,6 @@
+
 <?php
+
 //  $protocol = 'http'.(!empty($_SERVER['HTTPS']) ? 's' : '');
 $currURL = substr($_SERVER['PHP_SELF'], 0, strrpos($_SERVER['PHP_SELF'], '/'));
 $chkk="/AIDL/pages/examples" 
@@ -144,6 +146,17 @@ $chkk="/AIDL/pages/examples"
              
             </ul>
           </li>
+          <li class="nav-item has-treeview">
+            <a href=<?php echo ($currURL==$chkk?"blogg.php":$chkk."/blogg.php") ?> class="nav-link">
+              <i class="nav-icon far fa-circle"></i>
+              <p>
+              Blog
+                
+              </p>
+            </a>
+           
+          </li>
+         
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-tachometer-alt"></i>

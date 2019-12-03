@@ -1,4 +1,65 @@
-
+<?php
+// Include config file
+require_once "../../config/db.php";
+ 
+// Define variables and initialize with empty values
+$snamee = $sdesc = "";
+$sname_err = $sdesc_err = "";
+$date = date('d-m-Y');
+ 
+// Processing form data when form is submitted
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+    // Validate name
+    $input_name = trim($_POST["sname"]);
+    if(empty($input_name)){
+        $sname_err = "Please enter service name";
+    } elseif(!filter_var($input_name, FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/^[a-zA-Z\s]+$/")))){
+        $sname_err = "Please enter a valid service name";
+    } else{
+        $snamee = $input_name;
+    }
+    
+    // Validate address
+    $input_address = trim($_POST["sdescription"]);
+    if(empty($input_address)){
+        $sdesc_err = "Please enter service description";     
+    } else{
+        $sdesc = $input_address;
+    }
+   
+    
+    // Check input errors before inserting in database
+    if(empty($sname_err) && empty($sdesc_err)){
+        // Prepare an insert statement
+        $sql = "INSERT INTO add_service (sname, sdescription,dateposted) VALUES (?, ?,?)";
+         
+        if($stmt = mysqli_prepare($link, $sql)){
+            // Bind variables to the prepared statement as parameters
+            mysqli_stmt_bind_param($stmt, "sss", $param_sname, $param_sdesc,$param_date);
+            
+            // Set parameters
+            $param_sname = $snamee;
+            $param_sdesc = $sdesc;
+            $param_date=$date;
+            
+            // Attempt to execute the prepared statement
+            if(mysqli_stmt_execute($stmt)){
+                // Records created successfully. Redirect to landing page
+                header("location: ../../index.php");
+                exit();
+            } else{
+                echo "Something went wrong. Please try again later.";
+            }
+        }
+         
+        // Close statement
+        mysqli_stmt_close($stmt);
+    }
+    
+    // Close connection
+    mysqli_close($link);
+}
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -59,18 +120,21 @@
                   <i class="fas fa-minus"></i></button>
               </div>
             </div>
+            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
             <div class="card-body">
-              <div class="form-group">
+              <div class="form-group<?php echo (!empty($sname_err)) ? 'has-error' : ''; ?>">
                 <label for="inputName">Service Name</label>
-                <input type="text" id="inputName" class="form-control">
+                <input type="text" id="inputName" name="sname" class="form-control" value="<?php echo $snamee; ?>">
+                <span class="help-block" style="color: red;"><?php echo $sname_err;?></span>
               </div>
-              <div class="form-group">
+              <div class="form-group<?php echo (!empty($sdesc_err)) ? 'has-error' : ''; ?>">
                 <label for="inputDescription">Service Description</label>
-                <textarea id="inputDescription" class="form-control" rows="4"></textarea>
+                <textarea id="inputDescription" name="sdescription" class="form-control" rows="4"><?php echo $sdesc; ?></textarea>
+                <span class="help-block" style="color: red;"><?php echo $sdesc_err;?></span>
               </div>
              <div class="form-group">
-             <a href="#" class="btn btn-secondary">Cancel</a>
-          <input type="submit" value="Create new Porject" class="btn btn-success float-right">
+             <a href="../../index.php" class="btn btn-secondary">Cancel</a>
+          <input type="submit" value="Add new service" class="btn btn-success float-right">
              </div>
               
             </div>

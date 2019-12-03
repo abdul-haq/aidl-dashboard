@@ -1,3 +1,21 @@
+<?php
+           require_once('../../config/db.php');
+$upload_dir = 'images/';
+if(isset($_GET['delete'])){
+  $id = $_GET['delete'];
+  $sql = "select * from add_client where cid = ".$id;
+  $result = mysqli_query($link, $sql);
+  if(mysqli_num_rows($result) > 0){
+    $row = mysqli_fetch_assoc($result);
+    $image = $row['cimage'];
+    unlink($upload_dir.$image);
+    $sql = "delete from add_client where cid=".$id;
+    if(mysqli_query($link, $sql)){
+      header('location:clients.php');
+    }
+  }
+}
+?>
 <!DOCTYPE html>
 <html>
 
@@ -53,42 +71,43 @@
         <!-- Default box -->
         <div class="container">
           <div class="row">
+          <?php
+           require_once('../../config/db.php');
+           $sql = "select * from add_client";
+                            $result = mysqli_query($link, $sql);
+                    				if(mysqli_num_rows($result)){
+                    					while($row = mysqli_fetch_assoc($result)){
+                          ?>
             <div class="col-md-4">
               <!-- Widget: user widget style 1 -->
               <div class="card card-widget widget-user">
                 <!-- Add the bg color to the header using any of the bg-* classes -->
                 <div class="widget-user-header bg-info">
-                  <h3 class="widget-user-username">Alexander Pierce</h3>
-                  <h5 class="widget-user-desc">Founder & CEO</h5>
+                  <h3 class="widget-user-username"><?php echo $row['cname'] ?></h3>
+                  <h5 class="widget-user-desc"><?php echo $row['cdesc'] ?></h5>
                 </div>
                 <div class="widget-user-image">
-                  <img class="img-circle elevation-2" src="../../dist/img/user1-128x128.jpg" alt="User Avatar">
+                 
+                  <img class="img-circle elevation-2" style="height: 90px;" src="<?php echo $upload_dir . $row['cimage'] ?>" alt="User Avatar">
                 </div>
                 <div class="card-footer">
                   <div class="row">
-                    <div class="col-sm-4 border-right">
+                    <div class="col-sm-6 border-right">
                       <div class="description-block">
-                        <h5 class="description-header">3,200</h5>
-                        <span class="description-text">SALES</span>
+                        <span class="description-text"><a href="clients_update.php?id=<?php echo $row['cid'] ?>" class="btn btn-success"><i class="fa fa-edit"> Update</i></a></span>
                       </div>
                       <!-- /.description-block -->
                     </div>
                     <!-- /.col -->
-                    <div class="col-sm-4 border-right">
+                    <div class="col-sm-6">
                       <div class="description-block">
-                        <h5 class="description-header">13,000</h5>
-                        <span class="description-text">FOLLOWERS</span>
+                        <span class="description-text"> <a href="clients.php?delete=<?php echo $row['cid'] ?>" class="btn btn-danger" onclick="return confirm('Are you sure to delete this record?')"><i class="fa fa-trash-alt"> Delete</i></a>
+                            </span>
                       </div>
                       <!-- /.description-block -->
                     </div>
                     <!-- /.col -->
-                    <div class="col-sm-4">
-                      <div class="description-block">
-                        <h5 class="description-header">35</h5>
-                        <span class="description-text">PRODUCTS</span>
-                      </div>
-                      <!-- /.description-block -->
-                    </div>
+                  
                     <!-- /.col -->
                   </div>
                   <!-- /.row -->
@@ -96,350 +115,10 @@
               </div>
               <!-- /.widget-user -->
             </div>
-            <div class="col-md-4">
-              <!-- Widget: user widget style 1 -->
-              <div class="card card-widget widget-user">
-                <!-- Add the bg color to the header using any of the bg-* classes -->
-                <div class="widget-user-header bg-info">
-                  <h3 class="widget-user-username">Alexander Pierce</h3>
-                  <h5 class="widget-user-desc">Founder & CEO</h5>
-                </div>
-                <div class="widget-user-image">
-                  <img class="img-circle elevation-2" src="../../dist/img/user1-128x128.jpg" alt="User Avatar">
-                </div>
-                <div class="card-footer">
-                  <div class="row">
-                    <div class="col-sm-4 border-right">
-                      <div class="description-block">
-                        <h5 class="description-header">3,200</h5>
-                        <span class="description-text">SALES</span>
-                      </div>
-                      <!-- /.description-block -->
-                    </div>
-                    <!-- /.col -->
-                    <div class="col-sm-4 border-right">
-                      <div class="description-block">
-                        <h5 class="description-header">13,000</h5>
-                        <span class="description-text">FOLLOWERS</span>
-                      </div>
-                      <!-- /.description-block -->
-                    </div>
-                    <!-- /.col -->
-                    <div class="col-sm-4">
-                      <div class="description-block">
-                        <h5 class="description-header">35</h5>
-                        <span class="description-text">PRODUCTS</span>
-                      </div>
-                      <!-- /.description-block -->
-                    </div>
-                    <!-- /.col -->
-                  </div>
-                  <!-- /.row -->
-                </div>
-              </div>
-              <!-- /.widget-user -->
-            </div>
-            <div class="col-md-4">
-              <!-- Widget: user widget style 1 -->
-              <div class="card card-widget widget-user">
-                <!-- Add the bg color to the header using any of the bg-* classes -->
-                <div class="widget-user-header bg-info">
-                  <h3 class="widget-user-username">Alexander Pierce</h3>
-                  <h5 class="widget-user-desc">Founder & CEO</h5>
-                </div>
-                <div class="widget-user-image">
-                  <img class="img-circle elevation-2" src="../../dist/img/user1-128x128.jpg" alt="User Avatar">
-                </div>
-                <div class="card-footer">
-                  <div class="row">
-                    <div class="col-sm-4 border-right">
-                      <div class="description-block">
-                        <h5 class="description-header">3,200</h5>
-                        <span class="description-text">SALES</span>
-                      </div>
-                      <!-- /.description-block -->
-                    </div>
-                    <!-- /.col -->
-                    <div class="col-sm-4 border-right">
-                      <div class="description-block">
-                        <h5 class="description-header">13,000</h5>
-                        <span class="description-text">FOLLOWERS</span>
-                      </div>
-                      <!-- /.description-block -->
-                    </div>
-                    <!-- /.col -->
-                    <div class="col-sm-4">
-                      <div class="description-block">
-                        <h5 class="description-header">35</h5>
-                        <span class="description-text">PRODUCTS</span>
-                      </div>
-                      <!-- /.description-block -->
-                    </div>
-                    <!-- /.col -->
-                  </div>
-                  <!-- /.row -->
-                </div>
-              </div>
-              <!-- /.widget-user -->
-            </div>
-            <div class="col-md-4">
-              <!-- Widget: user widget style 1 -->
-              <div class="card card-widget widget-user">
-                <!-- Add the bg color to the header using any of the bg-* classes -->
-                <div class="widget-user-header bg-info">
-                  <h3 class="widget-user-username">Alexander Pierce</h3>
-                  <h5 class="widget-user-desc">Founder & CEO</h5>
-                </div>
-                <div class="widget-user-image">
-                  <img class="img-circle elevation-2" src="../../dist/img/user1-128x128.jpg" alt="User Avatar">
-                </div>
-                <div class="card-footer">
-                  <div class="row">
-                    <div class="col-sm-4 border-right">
-                      <div class="description-block">
-                        <h5 class="description-header">3,200</h5>
-                        <span class="description-text">SALES</span>
-                      </div>
-                      <!-- /.description-block -->
-                    </div>
-                    <!-- /.col -->
-                    <div class="col-sm-4 border-right">
-                      <div class="description-block">
-                        <h5 class="description-header">13,000</h5>
-                        <span class="description-text">FOLLOWERS</span>
-                      </div>
-                      <!-- /.description-block -->
-                    </div>
-                    <!-- /.col -->
-                    <div class="col-sm-4">
-                      <div class="description-block">
-                        <h5 class="description-header">35</h5>
-                        <span class="description-text">PRODUCTS</span>
-                      </div>
-                      <!-- /.description-block -->
-                    </div>
-                    <!-- /.col -->
-                  </div>
-                  <!-- /.row -->
-                </div>
-              </div>
-              <!-- /.widget-user -->
-            </div>
-            <div class="col-md-4">
-              <!-- Widget: user widget style 1 -->
-              <div class="card card-widget widget-user">
-                <!-- Add the bg color to the header using any of the bg-* classes -->
-                <div class="widget-user-header bg-info">
-                  <h3 class="widget-user-username">Alexander Pierce</h3>
-                  <h5 class="widget-user-desc">Founder & CEO</h5>
-                </div>
-                <div class="widget-user-image">
-                  <img class="img-circle elevation-2" src="../../dist/img/user1-128x128.jpg" alt="User Avatar">
-                </div>
-                <div class="card-footer">
-                  <div class="row">
-                    <div class="col-sm-4 border-right">
-                      <div class="description-block">
-                        <h5 class="description-header">3,200</h5>
-                        <span class="description-text">SALES</span>
-                      </div>
-                      <!-- /.description-block -->
-                    </div>
-                    <!-- /.col -->
-                    <div class="col-sm-4 border-right">
-                      <div class="description-block">
-                        <h5 class="description-header">13,000</h5>
-                        <span class="description-text">FOLLOWERS</span>
-                      </div>
-                      <!-- /.description-block -->
-                    </div>
-                    <!-- /.col -->
-                    <div class="col-sm-4">
-                      <div class="description-block">
-                        <h5 class="description-header">35</h5>
-                        <span class="description-text">PRODUCTS</span>
-                      </div>
-                      <!-- /.description-block -->
-                    </div>
-                    <!-- /.col -->
-                  </div>
-                  <!-- /.row -->
-                </div>
-              </div>
-              <!-- /.widget-user -->
-            </div>
-            <div class="col-md-4">
-              <!-- Widget: user widget style 1 -->
-              <div class="card card-widget widget-user">
-                <!-- Add the bg color to the header using any of the bg-* classes -->
-                <div class="widget-user-header bg-info">
-                  <h3 class="widget-user-username">Alexander Pierce</h3>
-                  <h5 class="widget-user-desc">Founder & CEO</h5>
-                </div>
-                <div class="widget-user-image">
-                  <img class="img-circle elevation-2" src="../../dist/img/user1-128x128.jpg" alt="User Avatar">
-                </div>
-                <div class="card-footer">
-                  <div class="row">
-                    <div class="col-sm-4 border-right">
-                      <div class="description-block">
-                        <h5 class="description-header">3,200</h5>
-                        <span class="description-text">SALES</span>
-                      </div>
-                      <!-- /.description-block -->
-                    </div>
-                    <!-- /.col -->
-                    <div class="col-sm-4 border-right">
-                      <div class="description-block">
-                        <h5 class="description-header">13,000</h5>
-                        <span class="description-text">FOLLOWERS</span>
-                      </div>
-                      <!-- /.description-block -->
-                    </div>
-                    <!-- /.col -->
-                    <div class="col-sm-4">
-                      <div class="description-block">
-                        <h5 class="description-header">35</h5>
-                        <span class="description-text">PRODUCTS</span>
-                      </div>
-                      <!-- /.description-block -->
-                    </div>
-                    <!-- /.col -->
-                  </div>
-                  <!-- /.row -->
-                </div>
-              </div>
-              <!-- /.widget-user -->
-            </div>
-            <div class="col-md-4">
-              <!-- Widget: user widget style 1 -->
-              <div class="card card-widget widget-user">
-                <!-- Add the bg color to the header using any of the bg-* classes -->
-                <div class="widget-user-header bg-info">
-                  <h3 class="widget-user-username">Alexander Pierce</h3>
-                  <h5 class="widget-user-desc">Founder & CEO</h5>
-                </div>
-                <div class="widget-user-image">
-                  <img class="img-circle elevation-2" src="../../dist/img/user1-128x128.jpg" alt="User Avatar">
-                </div>
-                <div class="card-footer">
-                  <div class="row">
-                    <div class="col-sm-4 border-right">
-                      <div class="description-block">
-                        <h5 class="description-header">3,200</h5>
-                        <span class="description-text">SALES</span>
-                      </div>
-                      <!-- /.description-block -->
-                    </div>
-                    <!-- /.col -->
-                    <div class="col-sm-4 border-right">
-                      <div class="description-block">
-                        <h5 class="description-header">13,000</h5>
-                        <span class="description-text">FOLLOWERS</span>
-                      </div>
-                      <!-- /.description-block -->
-                    </div>
-                    <!-- /.col -->
-                    <div class="col-sm-4">
-                      <div class="description-block">
-                        <h5 class="description-header">35</h5>
-                        <span class="description-text">PRODUCTS</span>
-                      </div>
-                      <!-- /.description-block -->
-                    </div>
-                    <!-- /.col -->
-                  </div>
-                  <!-- /.row -->
-                </div>
-              </div>
-              <!-- /.widget-user -->
-            </div>
-            <div class="col-md-4">
-              <!-- Widget: user widget style 1 -->
-              <div class="card card-widget widget-user">
-                <!-- Add the bg color to the header using any of the bg-* classes -->
-                <div class="widget-user-header bg-info">
-                  <h3 class="widget-user-username">Alexander Pierce</h3>
-                  <h5 class="widget-user-desc">Founder & CEO</h5>
-                </div>
-                <div class="widget-user-image">
-                  <img class="img-circle elevation-2" src="../../dist/img/user1-128x128.jpg" alt="User Avatar">
-                </div>
-                <div class="card-footer">
-                  <div class="row">
-                    <div class="col-sm-4 border-right">
-                      <div class="description-block">
-                        <h5 class="description-header">3,200</h5>
-                        <span class="description-text">SALES</span>
-                      </div>
-                      <!-- /.description-block -->
-                    </div>
-                    <!-- /.col -->
-                    <div class="col-sm-4 border-right">
-                      <div class="description-block">
-                        <h5 class="description-header">13,000</h5>
-                        <span class="description-text">FOLLOWERS</span>
-                      </div>
-                      <!-- /.description-block -->
-                    </div>
-                    <!-- /.col -->
-                    <div class="col-sm-4">
-                      <div class="description-block">
-                        <h5 class="description-header">35</h5>
-                        <span class="description-text">PRODUCTS</span>
-                      </div>
-                      <!-- /.description-block -->
-                    </div>
-                    <!-- /.col -->
-                  </div>
-                  <!-- /.row -->
-                </div>
-              </div>
-              <!-- /.widget-user -->
-            </div>
-            <div class="col-md-4">
-              <!-- Widget: user widget style 1 -->
-              <div class="card card-widget widget-user">
-                <!-- Add the bg color to the header using any of the bg-* classes -->
-                <div class="widget-user-header bg-info">
-                  <h3 class="widget-user-username">Alexander Pierce</h3>
-                  <h5 class="widget-user-desc">Founder & CEO</h5>
-                </div>
-                <div class="widget-user-image">
-                  <img class="img-circle elevation-2" src="../../dist/img/user1-128x128.jpg" alt="User Avatar">
-                </div>
-                <div class="card-footer">
-                  <div class="row">
-                    <div class="col-sm-4 border-right">
-                      <div class="description-block">
-                        <h5 class="description-header">3,200</h5>
-                        <span class="description-text">SALES</span>
-                      </div>
-                      <!-- /.description-block -->
-                    </div>
-                    <!-- /.col -->
-                    <div class="col-sm-4 border-right">
-                      <div class="description-block">
-                        <h5 class="description-header">13,000</h5>
-                        <span class="description-text">FOLLOWERS</span>
-                      </div>
-                      <!-- /.description-block -->
-                    </div>
-                    <!-- /.col -->
-                    <div class="col-sm-4">
-                      <div class="description-block">
-                        <h5 class="description-header">35</h5>
-                        <span class="description-text">PRODUCTS</span>
-                      </div>
-                      <!-- /.description-block -->
-                    </div>
-                    <!-- /.col -->
-                  </div>
-                  <!-- /.row -->
-                </div>
-              </div>
-              <!-- /.widget-user -->
-            </div>
+            <?php
+                              }
+                            }
+                          ?>
           </div>
         </div>
         <!-- /.card -->
@@ -449,14 +128,7 @@
     </div>
     <!-- /.content-wrapper -->
 
-    <footer class="main-footer">
-      <div class="float-right d-none d-sm-block">
-        <b>Version</b> 3.0.0
-      </div>
-      <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong> All rights
-      reserved.
-    </footer>
-
+  
     <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark">
       <!-- Control sidebar content goes here -->

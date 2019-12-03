@@ -1,3 +1,12 @@
+<?php require_once('../../config/db.php');
+
+
+$sql = "SELECT * FROM add_service";
+
+
+
+
+?>
 <!DOCTYPE html>
 <html>
 
@@ -53,173 +62,93 @@
 
       <!-- Main content -->
       <section class="content">
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col-12">
-              <div class="card card-primary">
-                <div class="card-header">
-                  <div class="card-title">
-                    Our Services
-                  </div>
-                </div>
-                <div class="card-body">
-                  <div class="social-box">
-                    <div class="container">
-                      <div class="row">
 
-                        <div class="col-lg-4 col-xs-12 text-center">
-                          <div class="box">
-                            <div class="box-title">
-                              <h3>Service 1</h3>
-                            </div>
-                            <div class="box-text">
-                              <span>Lorem ipsum dolor sit amet, id quo eruditi eloquentiam. Assum decore te sed. Elitr scripta ocurreret qui ad.</span>
-                            </div>
-                            <div class="box-btn">
-                              <a href="#">Learn More</a>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-lg-4 col-xs-12 text-center">
-                          <div class="box">
-                            <div class="box-title">
-                              <h3>Service 2</h3>
-                            </div>
-                            <div class="box-text">
-                              <span>Lorem ipsum dolor sit amet, id quo eruditi eloquentiam. Assum decore te sed. Elitr scripta ocurreret qui ad.</span>
-                            </div>
-                            <div class="box-btn">
-                              <a href="#">Learn More</a>
-                            </div>
-                          </div>
-                        </div><div class="col-lg-4 col-xs-12 text-center">
-                          <div class="box">
-                            <div class="box-title">
-                              <h3>Service 3</h3>
-                            </div>
-                            <div class="box-text">
-                              <span>Lorem ipsum dolor sit amet, id quo eruditi eloquentiam. Assum decore te sed. Elitr scripta ocurreret qui ad.</span>
-                            </div>
-                            <div class="box-btn">
-                              <a href="#">Learn More</a>
-                            </div>
-                          </div>
-                        </div><div class="col-lg-4 col-xs-12 text-center">
-                          <div class="box">
-                            <div class="box-title">
-                              <h3>Service 4</h3>
-                            </div>
-                            <div class="box-text">
-                              <span>Lorem ipsum dolor sit amet, id quo eruditi eloquentiam. Assum decore te sed. Elitr scripta ocurreret qui ad.</span>
-                            </div>
-                            <div class="box-btn">
-                              <a href="#">Learn More</a>
-                            </div>
-                          </div>
-                        </div><div class="col-lg-4 col-xs-12 text-center">
-                          <div class="box">
-                            <div class="box-title">
-                              <h3>Service 5</h3>
-                            </div>
-                            <div class="box-text">
-                              <span>Lorem ipsum dolor sit amet, id quo eruditi eloquentiam. Assum decore te sed. Elitr scripta ocurreret qui ad.</span>
-                            </div>
-                            <div class="box-btn">
-                              <a href="#">Learn More</a>
-                            </div>
-                          </div>
-                        </div><div class="col-lg-4 col-xs-12 text-center">
-                          <div class="box">
-                            <div class="box-title">
-                              <h3>Service 6</h3>
-                            </div>
-                            <div class="box-text">
-                              <span>Lorem ipsum dolor sit amet, id quo eruditi eloquentiam. Assum decore te sed. Elitr scripta ocurreret qui ad.</span>
-                            </div>
-                            <div class="box-btn">
-                              <a href="#">Learn More</a>
-                            </div>
-                          </div>
-                        </div>
-                        
+        <!-- Default box -->
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Prducts</h3>
 
+            <div class="card-tools">
+              <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                <i class="fas fa-minus"></i></button>
 
-
-                      </div>
-                    </div>
-                  </div>
-
-                  <!-- <div> 
-                  <div class="filter-container p-0 row">
-                    <div class="filtr-item col-sm-2" data-category="1" data-sort="white sample">
-                      <a href="https://via.placeholder.com/1200/FFFFFF.png?text=1" data-toggle="lightbox" data-title="sample 1 - white">
-                        <img src="https://via.placeholder.com/300/FFFFFF?text=1" class="img-fluid mb-2" alt="white sample"/>
-                      </a>
-                    </div>
-                    <div class="filtr-item col-sm-2" data-category="2" data-sort="black sample">
-                      <a href="https://via.placeholder.com/1200/000000.png?text=2" data-toggle="lightbox" data-title="sample 2 - black">
-                        <img src="https://via.placeholder.com/300/000000?text=2" class="img-fluid mb-2" alt="black sample"/>
-                      </a>
-                    </div>
-                    <div class="filtr-item col-sm-2" data-category="3" data-sort="red sample">
-                      <a href="https://via.placeholder.com/1200/FF0000/FFFFFF.png?text=3" data-toggle="lightbox" data-title="sample 3 - red">
-                        <img src="https://via.placeholder.com/300/FF0000/FFFFFF?text=3" class="img-fluid mb-2" alt="red sample"/>
-                      </a>
-                    </div>
-                    <div class="filtr-item col-sm-2" data-category="4" data-sort="red sample">
-                      <a href="https://via.placeholder.com/1200/FF0000/FFFFFF.png?text=4" data-toggle="lightbox" data-title="sample 4 - red">
-                        <img src="https://via.placeholder.com/300/FF0000/FFFFFF?text=4" class="img-fluid mb-2" alt="red sample"/>
-                      </a>
-                    </div>
-                    <div class="filtr-item col-sm-2" data-category="5" data-sort="black sample">
-                      <a href="https://via.placeholder.com/1200/000000.png?text=5" data-toggle="lightbox" data-title="sample 5 - black">
-                        <img src="https://via.placeholder.com/300/000000?text=5" class="img-fluid mb-2" alt="black sample"/>
-                      </a>
-                    </div>
-                    <div class="filtr-item col-sm-2" data-category="6" data-sort="white sample">
-                      <a href="https://via.placeholder.com/1200/FFFFFF.png?text=6" data-toggle="lightbox" data-title="sample 6 - white">
-                        <img src="https://via.placeholder.com/300/FFFFFF?text=6" class="img-fluid mb-2" alt="white sample"/>
-                      </a>
-                    </div>
-                    <div class="filtr-item col-sm-2" data-category="7" data-sort="white sample">
-                      <a href="https://via.placeholder.com/1200/FFFFFF.png?text=7" data-toggle="lightbox" data-title="sample 7 - white">
-                        <img src="https://via.placeholder.com/300/FFFFFF?text=7" class="img-fluid mb-2" alt="white sample"/>
-                      </a>
-                    </div>
-                    <div class="filtr-item col-sm-2" data-category="8" data-sort="black sample">
-                      <a href="https://via.placeholder.com/1200/000000.png?text=8" data-toggle="lightbox" data-title="sample 8 - black">
-                        <img src="https://via.placeholder.com/300/000000?text=8" class="img-fluid mb-2" alt="black sample"/>
-                      </a>
-                    </div>
-                    <div class="filtr-item col-sm-2" data-category="9" data-sort="red sample">
-                      <a href="https://via.placeholder.com/1200/FF0000/FFFFFF.png?text=9" data-toggle="lightbox" data-title="sample 9 - red">
-                        <img src="https://via.placeholder.com/300/FF0000/FFFFFF?text=9" class="img-fluid mb-2" alt="red sample"/>
-                      </a>
-                    </div>
-                    <div class="filtr-item col-sm-2" data-category="10" data-sort="white sample">
-                      <a href="https://via.placeholder.com/1200/FFFFFF.png?text=10" data-toggle="lightbox" data-title="sample 10 - white">
-                        <img src="https://via.placeholder.com/300/FFFFFF?text=10" class="img-fluid mb-2" alt="white sample"/>
-                      </a>
-                    </div>
-                    <div class="filtr-item col-sm-2" data-category="11" data-sort="white sample">
-                      <a href="https://via.placeholder.com/1200/FFFFFF.png?text=11" data-toggle="lightbox" data-title="sample 11 - white">
-                        <img src="https://via.placeholder.com/300/FFFFFF?text=11" class="img-fluid mb-2" alt="white sample"/>
-                      </a>
-                    </div>
-                    <div class="filtr-item col-sm-2" data-category="12" data-sort="black sample">
-                      <a href="https://via.placeholder.com/1200/000000.png?text=12" data-toggle="lightbox" data-title="sample 12 - black">
-                        <img src="https://via.placeholder.com/300/000000?text=12" class="img-fluid mb-2" alt="black sample"/>
-                      </a>
-                    </div>
-                  </div>
-                </div>  -->
-
-                </div>
-              </div>
             </div>
-
           </div>
-        </div><!-- /.container-fluid -->
+
+          <div class="card-body p-0">
+            <?php
+            if ($result = mysqli_query($link, $sql)) {
+              if (mysqli_num_rows($result) > 0) {
+                ?>
+                <table class="table table-striped projects">
+                  <thead>
+                    <tr>
+                      <th style="width: 1%">
+                        SID
+                      </th>
+                      <th style="width: 20%">
+                        Service Name
+                      </th>
+                      <th style="width: 50%">
+                        Service Description
+                      </th>
+
+
+                      <th style="width: 20%">
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php while ($row = mysqli_fetch_array($result)) { ?>
+                      <tr>
+                        <td>
+                          <?= $row['sid'] ?>
+                        </td>
+                        <td>
+                          <a>
+                            <?= $row['sname'] ?>
+                          </a>
+                          <br />
+                          <small>
+                            Created <?= $row['dateposted'] ?>
+                          </small>
+                        </td>
+                        <td>
+                          <p><?= $row['sdescription'] ?></p>
+                        </td>
+
+                        <td class="project-actions text-right">
+
+                          <a class="btn btn-info btn-sm" href="services_update.php?id=<?= $row['sid'] ?>">
+                            <i class="fas fa-pencil-alt">
+                            </i>
+                            Edit
+                          </a>
+                          <a style="color: white;" class="btn btn-danger btn-sm" class="delbutton" id="<?= $row['sid'] ?>" onclick="dlt(this)">
+                            <i class="fas fa-trash">
+                            </i>
+                            Delete
+                          </a>
+                        </td>
+                      </tr>
+                <?php
+                    }
+                    mysqli_free_result($result);
+                  } else {
+                    echo "No records matching your query were found.";
+                  }
+                } else {
+                  echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
+                }
+                ?>
+
+                  </tbody>
+                </table>
+          </div>
+          <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+
       </section>
       <!-- /.content -->
     </div>
@@ -237,6 +166,8 @@
   <script src="../../plugins/jquery/jquery.min.js"></script>
   <!-- Bootstrap -->
   <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
   <!-- jQuery UI -->
   <script src="../../plugins/jquery-ui/jquery-ui.min.js"></script>
   <!-- Ekko Lightbox -->
@@ -248,6 +179,32 @@
   <!-- Filterizr-->
   <script src="../../plugins/filterizr/jquery.filterizr.min.js"></script>
   <!-- Page specific script -->
+  <script type="text/javascript">
+  function dlt(e){
+  
+      swal({
+          title: "Are you sure?",
+          text: "Once deleted, you will not be able to recover this imaginary file!",
+          icon: "warning",
+          buttons: true,
+          dangerMode: true,
+        })
+        .then((willDelete) => {
+
+          if (willDelete) {
+           
+            
+            window.location = `delete_entry.php?id=${e.id}`;
+          } else {
+            swal("Your file is safe!", {
+              icon: "success",
+            });
+          }
+        });
+    // })
+  }
+ 
+  </script>
   <script>
     $(function() {
       $(document).on('click', '[data-toggle="lightbox"]', function(event) {
@@ -264,8 +221,10 @@
         $('.btn[data-filter]').removeClass('active');
         $(this).addClass('active');
       });
-    })
+    });
   </script>
+
+
 </body>
 
 </html>

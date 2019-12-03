@@ -1,3 +1,13 @@
+<?php require_once('../../config/db.php');
+
+
+$sql = "SELECT * FROM add_product";
+
+
+
+
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -22,11 +32,11 @@
   <!-- Site wrapper -->
   <div class="wrapper">
     <!-- Navbar -->
-    <?php include("navbar.php")?>
+    <?php include("navbar.php") ?>
     <!-- /.navbar -->
 
     <!-- Main Sidebar Container -->
-    <?php require("../../sidebar.php")?>
+    <?php require("../../sidebar.php") ?>
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -56,133 +66,88 @@
             <h3 class="card-title">Prducts</h3>
 
             <div class="card-tools">
-              <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip"
-                title="Collapse">
+              <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
                 <i class="fas fa-minus"></i></button>
-              
+
             </div>
           </div>
+
           <div class="card-body p-0">
-            <table class="table table-striped projects">
-              <thead>
-                <tr>
-                  <th style="width: 1%">
-                    #
-                  </th>
-                  <th style="width: 20%">
-                    Product
-                  </th>
-                  <th style="width: 50%">
-                    Product Description
-                  </th>
-                  <!-- <th>
-                    Project Progress
-                  </th>
-                  <th style="width: 8%" class="text-center">
-                    Status
-                  </th> -->
-                  <th style="width: 20%">
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>
-                    #
-                  </td>
-                  <td>
-                    <a>
-                      Product 1
-                    </a>
-                    <br />
-                    <small>
-                      Created 01.01.2019
-                    </small>
-                  </td>
-                  <td>
-                   <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam sit expedita fugit totam dolores nobis omnis, ipsam blanditiis facilis neque adipisci inventore non quisquam qui ipsa, molestiae consequatur reiciendis perspiciatis.</p>
-                  </td>
-                  <!-- <td class="project_progress">
-                    <div class="progress progress-sm">
-                      <div class="progress-bar bg-green" role="progressbar" aria-volumenow="57" aria-volumemin="0"
-                        aria-volumemax="100" style="width: 57%">
-                      </div>
-                    </div>
-                    <small>
-                      57% Complete
-                    </small>
-                  </td> -->
-                  <!-- <td class="project-state">
-                    <span class="badge badge-success">Success</span>
-                  </td> -->
-                  <td class="project-actions text-right">
-                    <a class="btn btn-primary btn-sm" href="./project_detail.html">
-                      <i class="fas fa-folder">
-                      </i>
-                      View
-                    </a>
-                    <a class="btn btn-info btn-sm" href="./project_edit.html">
-                      <i class="fas fa-pencil-alt">
-                      </i>
-                      Edit
-                    </a>
-                    <a class="btn btn-danger btn-sm" href="#">
-                      <i class="fas fa-trash">
-                      </i>
-                      Delete
-                    </a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    #
-                  </td>
-                  <td>
-                    <a>
-                      Product 2
-                    </a>
-                    <br />
-                    <small>
-                      Created 01.01.2019
-                    </small>
-                  </td>
-                  <td>
-                   <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam sit expedita fugit totam dolores nobis omnis, ipsam blanditiis facilis neque adipisci inventore non quisquam qui ipsa, molestiae consequatur reiciendis perspiciatis.</p>
-                  </td>
-                  <!-- <td class="project_progress">
-                    <div class="progress progress-sm">
-                      <div class="progress-bar bg-green" role="progressbar" aria-volumenow="57" aria-volumemin="0"
-                        aria-volumemax="100" style="width: 57%">
-                      </div>
-                    </div>
-                    <small>
-                      57% Complete
-                    </small>
-                  </td> -->
-                  <!-- <td class="project-state">
-                    <span class="badge badge-success">Success</span>
-                  </td> -->
-                  <td class="project-actions text-right">
-                    <a class="btn btn-primary btn-sm" href="./project_detail.html">
-                      <i class="fas fa-folder">
-                      </i>
-                      View
-                    </a>
-                    <a class="btn btn-info btn-sm" href="./project_edit.html">
-                      <i class="fas fa-pencil-alt">
-                      </i>
-                      Edit
-                    </a>
-                    <a class="btn btn-danger btn-sm" href="#">
-                      <i class="fas fa-trash">
-                      </i>
-                      Delete
-                    </a>
-                  </td>
-                </tr>
-               
-              </tbody>
-            </table>
+            <?php
+            if ($result = mysqli_query($link, $sql)) {
+              if (mysqli_num_rows($result) > 0) {
+                ?>
+                <table class="table table-striped projects">
+                  <thead>
+                    <tr>
+                      <th style="width: 1%">
+                        PID
+                      </th>
+                      <th style="width: 20%">
+                        Product Name
+                      </th>
+                      <th style="width: 40%">
+                        Product Description
+                      </th>
+
+                      <th style="width: 8%" class="text-center">
+                        Product Image
+                      </th>
+                      <th style="width: 20%">
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php while ($row = mysqli_fetch_array($result)) { ?>
+                      <tr>
+                        <td>
+                          <?= $row['p_id'] ?>
+                        </td>
+                        <td>
+                          <a>
+                            <?= $row['p_name'] ?>
+                          </a>
+                          <br />
+                          <small>
+                            Created 01.01.2019
+                          </small>
+                        </td>
+                        <td>
+                          <p><?= $row['p_description'] ?></p>
+                        </td>
+                        <td><img src="images/<?= $row['p_img'] ?>" width='100px' height='100px'></td>
+
+                        <td class="project-actions text-right">
+                          <a class="btn btn-primary btn-sm" href="./project_detail.html">
+                            <i class="fas fa-folder">
+                            </i>
+                            View
+                          </a>
+                          <a class="btn btn-info btn-sm" href="./project_edit.html">
+                            <i class="fas fa-pencil-alt">
+                            </i>
+                            Edit
+                          </a>
+                          <a class="btn btn-danger btn-sm" href="#">
+                            <i class="fas fa-trash">
+                            </i>
+                            Delete
+                          </a>
+                        </td>
+                      </tr>
+                <?php
+                    }
+                    mysqli_free_result($result);
+                  } else {
+                    echo "No records matching your query were found.";
+                  }
+                } else {
+                  echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
+                }
+                ?>
+
+                  </tbody>
+                </table>
           </div>
           <!-- /.card-body -->
         </div>
@@ -193,13 +158,7 @@
     </div>
     <!-- /.content-wrapper -->
 
-    <footer class="main-footer">
-      <div class="float-right d-none d-sm-block">
-        <b>Version</b> 3.0.0
-      </div>
-      <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong> All rights
-      reserved.
-    </footer>
+   
 
     <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark">

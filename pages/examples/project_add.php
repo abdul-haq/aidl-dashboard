@@ -1,4 +1,4 @@
-
+<?php require_once('../../config/db.php') ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -48,6 +48,7 @@
 
     <!-- Main content -->
     <section class="content">
+    <form action="" method="post" enctype="multipart/form-data">
       <div class="row">
         <div class="col-md-6">
           <div class="card card-primary">
@@ -60,13 +61,14 @@
               </div>
             </div>
             <div class="card-body">
+           
               <div class="form-group">
                 <label for="inputName">Product Name</label>
-                <input type="text" id="inputName" class="form-control">
+                <input type="text" name="name" id="inputName" class="form-control">
               </div>
               <div class="form-group">
                 <label for="inputDescription">Product Description</label>
-                <textarea id="inputDescription" class="form-control" rows="4"></textarea>
+                <textarea id="inputDescription" name="email" class="form-control" rows="4"></textarea>
               </div>
              
               
@@ -88,7 +90,7 @@
             <div class="card-body">
               <div class="form-group">
                 <label for="inputEstimatedBudget">Product Image</label>
-                <input type="file" id="inputEstimatedBudget" class="form-control">
+                <input type="file" name="image" id="inputEstimatedBudget" class="form-control">
               </div>
               
             </div>
@@ -96,13 +98,15 @@
           </div>
           <!-- /.card -->
         </div>
+        
       </div>
       <div class="row">
         <div class="col-12">
-          <a href="#" class="btn btn-secondary">Cancel</a>
-          <input type="submit" value="Create new Porject" class="btn btn-success float-right">
+
+          <input type="submit" name="submit" value="Create new Project" class="btn btn-success float-right">
         </div>
       </div>
+      </form>
     </section>
     <!-- /.content -->
   </div>
@@ -128,3 +132,36 @@
 <script src="../../dist/js/demo.js"></script>
 </body>
 </html>
+
+
+<?php 
+  $img = "";
+if(isset($_POST['submit'])){ // Fetching variables of the form which travels in URL
+
+  // Get image name
+  $p_name = $_POST["name"];
+  $p_des = $_POST["email"];
+  $image = $_FILES['image']['name'];
+  // Get text
+  // $image_text = mysqli_real_escape_string($db, $_POST['image_text']);
+
+  // image file directory
+  $target = "images/".basename($image);
+
+  $sql = "INSERT INTO add_product (p_name, p_description, p_img) VALUES ('$p_name','$p_des','$image')";
+  // execute query
+  mysqli_query($link, $sql);
+
+  if (move_uploaded_file($_FILES['image']['tmp_name'], $target)) {
+    $msg = "Image uploaded successfully";
+  }
+  else{
+    $msg = "Failed to upload image";
+  }
+}
+
+
+
+
+
+?>
